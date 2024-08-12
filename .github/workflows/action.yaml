@@ -3,7 +3,7 @@ name: Build and Deploy Sphinx Documentation to Wiki
 on:
   push:
     branches:
-      - main  # Passe den Branch-Namen nach Bedarf an
+      - main  # Passe den Branch-Namen an, falls du einen anderen verwendest.
 
 jobs:
   build:
@@ -16,7 +16,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: '3.x'  # Wähle die benötigte Python-Version
+        python-version: '3.x'
 
     - name: Install dependencies
       run: |
@@ -25,8 +25,18 @@ jobs:
 
     - name: Build Sphinx documentation
       run: |
-        cd docs  # Passe den Pfad zu deinem Sphinx-Projekt an
+        cd docs
         make html
+
+    - name: Ensure build directory exists
+      run: |
+        if [ ! -d "docs/_build/html" ]; then
+          echo "Build directory does not exist"
+          exit 1
+        fi
+
+    - name: Check build directory content
+      run: ls -la docs/_build/html/
 
     - name: Deploy to GitHub Wiki
       env:
