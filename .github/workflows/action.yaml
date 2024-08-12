@@ -30,13 +30,13 @@ jobs:
 
     - name: Ensure build directory exists
       run: |
-        if [ ! -d "docs/_build/html" ]; then
+        if [ ! -d "docs/build/html" ]; then
           echo "Build directory does not exist"
           exit 1
         fi
 
     - name: Check build directory content
-      run: ls -la docs/_build/html/
+      run: ls -la docs/build/html/
 
     - name: Deploy to GitHub Wiki
       env:
@@ -44,7 +44,7 @@ jobs:
       run: |
         git clone https://github.com/${{ github.repository }}.wiki.git wiki
         rm -rf wiki/*
-        cp -r docs/_build/html/* wiki/
+        cp -r docs/build/html/* wiki/
         cd wiki
         git add .
         git commit -m "Update documentation"
