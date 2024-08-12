@@ -25,7 +25,7 @@ jobs:
 
     - name: Generate API documentation
       run: |
-        sphinx-apidoc -o docs/source ./main.py ./modul ./test
+        sphinx-apidoc -o docs/source ./modul ./test
 
     - name: Build Sphinx documentation
       run: |
