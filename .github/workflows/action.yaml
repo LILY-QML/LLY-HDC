@@ -3,7 +3,7 @@ name: Build and Deploy Sphinx Documentation to Wiki
 on:
   push:
     branches:
-      - main  # Passe den Branch-Namen an, falls du einen anderen verwendest.
+      - main
 
 jobs:
   build:
@@ -28,26 +28,17 @@ jobs:
         cd docs
         make html
 
-    - name: Ensure build directory exists
-      run: |
-        if [ ! -d "docs/build/html" ]; then
-          echo "Build directory does not exist"
-          exit 1
-        fi
-
-    - name: Check build directory content
-      run: ls -la docs/build/html/
-
     - name: Deploy to GitHub Wiki
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.TOKEN }}
       run: |
         git clone https://github.com/${{ github.repository }}.wiki.git wiki
-        rm -rf wiki/*
-        cp -r docs/build/html/* wiki/
         cd wiki
         git config user.name "GitHub Actions"
         git config user.email "actions@github.com"
+        rm -rf *
+        cp -r ../docs/build/html/* .
         git add .
         git commit -m "Update documentation"
-        git push
+        git remote set-url origin https://x-access-token:${{ secrets.TOKEN }}@github.com/${{ github.repository }}.wiki.git
+        git push origin master
