@@ -46,6 +46,8 @@ jobs:
         rm -rf wiki/*
         cp -r docs/build/html/* wiki/
         cd wiki
+        git config user.name "GitHub Actions"
+        git config user.email "actions@github.com"
         git add .
         git commit -m "Update documentation"
         git push
