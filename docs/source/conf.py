@@ -14,11 +14,18 @@ release = '3. August 2024'
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-extensions = []
 
 templates_path = ['_templates']
 exclude_patterns = []
+extensions = [
+    'sphinx.ext.autodoc',
+    'sphinx.ext.viewcode',
+    'sphinx.ext.napoleon',
+]
 
+import os
+import sys
+sys.path.insert(0, os.path.abspath('../'))
 
 
 # -- Options for HTML output -------------------------------------------------

@@ -23,6 +23,10 @@ jobs:
         python -m pip install --upgrade pip
         pip install sphinx
 
+    - name: Generate API documentation
+      run: |
+        sphinx-apidoc -o docs/source ./main.py ./modul ./test
+
     - name: Build Sphinx documentation
       run: |
         cd docs
@@ -42,3 +46,7 @@ jobs:
         git commit -m "Update documentation"
         git remote set-url origin https://x-access-token:${{ secrets.TOKEN }}@github.com/${{ github.repository }}.wiki.git
         git push origin master
+
+    - name: Cleanup __pycache__ directories
+      run: |
+        find . -name '__pycache__' -exec rm -rf {} +

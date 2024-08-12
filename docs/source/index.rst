@@ -1,17 +1,41 @@
-.. LLY-HDC documentation master file, created by
-   sphinx-quickstart on Mon Aug 12 12:10:42 2024.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
 LLY-HDC documentation
 =====================
-
-Add your content using ``reStructuredText`` syntax. See the
-`reStructuredText <https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html>`_
-documentation for details.
-
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
+   modules
+
+Main Script
+===========
+
+.. automodule:: main
+   :members:
+
+Module Documentation
+====================
+
+.. automodule:: modul.circuit
+   :members:
+
+.. automodule:: modul.interconnect
+   :members:
+
+.. automodule:: modul.measurement
+   :members:
+
+.. automodule:: modul.subsystem
+   :members:
+
+.. automodule:: modul.tokenizer
+   :members:
+
+.. automodule:: modul.tokensystem
+   :members:
+
+Test Documentation
+==================
+
+.. automodule:: test.test_module
+   :members:
