@@ -3,11 +3,9 @@ from qiskit import QuantumCircuit
 class Circuit:
     """Represents the global main quantum circuit."""
 
-    def __init__(self, total_qubits):
+    def __init__(self, total_qubits=50):
         self.total_qubits = total_qubits
         self.circuit = QuantumCircuit(total_qubits)
-        self.token_start_index = 0
-        self.subsystem_start_index = 20
         self.qubits_allocated = 0
 
     def allocate_qubits(self, num_qubits):

@@ -6,9 +6,9 @@ from modul.interconnect import Interconnect
 import numpy as np
 
 def main():
-    total_qubits = 50    # 20 Qubits für das Token-System und 30 Qubits für drei Subsysteme (jeweils 10 Qubits)
-    main_qubits = 20     # Die Anzahl der Qubits, die dem Token-System zugewiesen werden
-    subsystem_qubits = 10  # Die Anzahl der Qubits, die jedem Subsystem zugewiesen werden
+    total_qubits = 50    # 50 Qubits insgesamt im Circuit
+    main_qubits = 20     # Anzahl der Qubits, die dem Token-System zugewiesen werden
+    subsystem_qubits = 10  # Anzahl der Qubits, die jedem Subsystem zugewiesen werden
     subsystems_count = 3  # Anzahl der Subsysteme
     shots = 1024
 
@@ -26,7 +26,7 @@ def main():
     # Initialisiere den Hauptcircuit
     main_circuit = Circuit(total_qubits)
 
-    # Erstelle und initialisiere das Token-System mit der Token-Matrix
+    # Initialisiere das Token-System mit der Token-Matrix
     token_system = TokenSystem(main_circuit, num_qubits=main_qubits)
     token_system.tp_matrix = np.array(tokens).T[:3, :main_qubits]  # Setze die Token-Matrix als IP-Matrix
     token_system.apply_operations()  # Wende die Operationen des Token-Systems an
@@ -34,10 +34,11 @@ def main():
     # Erstelle die Subsysteme
     subsystems = []
     subsystems_ranges = []
-    for _ in range(subsystems_count):
+    for i in range(subsystems_count):
         subsystem_matrix = np.random.rand(subsystem_qubits, 3) * 2 * np.pi
-        print(f"Subsystem Matrix (Phasen) für Subsystem {_ + 1}:\n{subsystem_matrix}")
+        print(f"Subsystem Matrix (Phasen) für Subsystem {i + 1}:\n{subsystem_matrix}")
 
+        # Initialisiere das Subsystem mit einer neuen Qubit-Zuweisung
         subsystem = Subsystem(main_circuit, num_qubits=subsystem_qubits)
         subsystem.tp_matrix = subsystem_matrix
         subsystem.apply_operations()  # Wende die Operationen des Subsystems an
