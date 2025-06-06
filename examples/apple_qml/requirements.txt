@@ -1,0 +1,24 @@
+# Core Quantum Computing
+qiskit>=1.0.0
+qiskit-aer>=0.13.0
+
+# Scientific Computing
+numpy>=1.24.0
+scipy>=1.10.0
+
+# Data Manipulation
+pandas>=2.0.0
+
+# Visualization
+matplotlib>=3.7.0
+seaborn>=0.12.0
+
+# Configuration
+pyyaml>=6.0
+
+# Progress Bars and Utilities
+tqdm>=4.65.0
+
+# Optional: Jupyter Support
+# jupyter>=1.0.0
+# ipywidgets>=8.0.0

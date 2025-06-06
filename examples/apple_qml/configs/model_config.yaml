@@ -1,0 +1,225 @@
+# Apple QML Model Configuration
+# Zentrale Konfigurationsdatei für alle Modell-Parameter
+
+# === MODELL-ARCHITEKTUR ===
+model:
+  # Anzahl Qubits pro Eigenschaft (Frische, Haltbarkeit, Geschmack)
+  n_qubits_per_property: 3
+  
+  # Gesamtanzahl Qubits (automatisch berechnet: 3 * n_qubits_per_property)
+  total_qubits: 9
+  
+  # Qubit-Mapping zu Subsystemen
+  qubit_mapping:
+    freshness: [0, 1, 2]      # Input-Subsystem
+    durability: [3, 4, 5]     # Output 1
+    taste: [6, 7, 8]          # Output 2
+  
+  # Parameter-Initialisierung
+  parameter_initialization:
+    method: "random"          # "random", "zero", "xavier"
+    seed: 42                  # Reproduzierbarkeit
+    range: [0, 6.283]         # [0, 2π]
+
+# === TRAINING-KONFIGURATION ===
+training:
+  # Standard Hyperparameter
+  default:
+    epochs: 50
+    learning_rate: 0.15
+    batch_size: 8
+    patience: 15              # Early Stopping
+    min_delta: 1e-6          # Minimale Verbesserung
+    
+  # Adaptive Learning Rate
+  adaptive_lr:
+    enabled: true
+    decay_factor: 0.95
+    plateau_threshold: 5      # Epochen ohne Verbesserung
+    min_lr: 0.001
+    
+  # Gradient Clipping
+  gradient_clipping:
+    enabled: false
+    max_norm: 1.0
+    
+  # Regularisierung
+  regularization:
+    l1_lambda: 0.0           # L1 Regularisierung (noch nicht implementiert)
+    l2_lambda: 0.0           # L2 Regularisierung (noch nicht implementiert)
+
+# === OPTIMIZER-KONFIGURATION ===
+optimizers:
+  # Gradient Descent Einstellungen
+  gradient_descent:
+    finite_difference_eps: 0.01
+    momentum: 0.0             # Momentum (noch nicht implementiert)
+    
+  # Scipy Optimizer Einstellungen
+  scipy:
+    methods: ["COBYLA", "Nelder-Mead", "Powell"]
+    default_method: "COBYLA"
+    max_iterations: 100
+    tolerance: 1e-8
+
+# === DATEN-KONFIGURATION ===
+data:
+  # Datengenerierung
+  generation:
+    default_samples: 50
+    noise_level: 0.1          # 0.0 - 1.0
+    seed: 42
+    
+  # Daten-Split
+  split:
+    train_ratio: 0.7
+    validation_ratio: 0.15    # Vom verbleibenden Rest
+    test_ratio: 0.15          # Vom verbleibenden Rest
+    stratify: true
+    
+  # Datentypen
+  types:
+    - name: "linear"
+      description: "Einfache lineare Beziehungen"
+      parameters:
+        durability_slope: 0.8
+        taste_slope: 0.9
+        
+    - name: "realistic" 
+      description: "Realistische nichtlineare Beziehungen"
+      parameters:
+        variety_noise: 0.15
+        optimal_freshness: 7.0
+        
+    - name: "nonlinear"
+      description: "Komplexe mathematische Beziehungen"
+      parameters:
+        exponential_base: 5.0
+        sinusoidal_frequency: 8.0
+
+# === QUANTUM-BACKEND-KONFIGURATION ===
+quantum:
+  # Simulator-Einstellungen
+  simulator:
+    backend: "aer_simulator"
+    shots: 1024
+    memory: false
+    max_parallel_threads: 0   # 0 = auto
+    
+  # Fehlermodellierung (experimentell)
+  noise_model:
+    enabled: false
+    depolarizing_error: 0.001
+    thermal_relaxation: false
+
+# === VISUALISIERUNG-KONFIGURATION ===
+visualization:
+  # Standard-Einstellungen
+  default:
+    style: "seaborn-v0_8-whitegrid"
+    color_palette: "viridis"
+    dpi: 300
+    figsize: [12, 8]
+    
+  # Farben für verschiedene Komponenten
+  colors:
+    freshness: "#2E8B57"      # Sea Green
+    durability: "#4169E1"     # Royal Blue
+    taste: "#FF6347"          # Tomato
+    gate: "#8A2BE2"           # Blue Violet
+    measurement: "#DC143C"    # Crimson
+    parameter: "#FFD700"      # Gold
+    
+  # Schriftgrößen
+  fonts:
+    title: 16
+    subtitle: 14
+    label: 12
+    tick: 10
+    legend: 10
+    annotation: 9
+
+# === EXPERIMENT-KONFIGURATION ===
+experiments:
+  # Hyperparameter-Optimierung
+  hyperparameter_optimization:
+    method: "grid_search"     # "grid_search", "random_search", "bayesian"
+    n_trials: 3               # Wiederholungen pro Konfiguration
+    cv_folds: 5               # Cross-Validation Folds
+    
+    # Grid Search Parameter
+    parameter_grid:
+      epochs: [20, 30, 50]
+      learning_rate: [0.1, 0.15, 0.2, 0.25]
+      batch_size: [4, 6, 8, 10]
+      adaptive_lr: [true, false]
+      
+  # Ensemble-Konfiguration
+  ensemble:
+    n_models: 5
+    diversity_methods:
+      - "different_seeds"
+      - "different_hyperparams"
+      - "different_architectures"  # Zukünftig
+      
+  # Benchmark-Tests
+  benchmarks:
+    baseline_models:
+      - "linear_regression"
+      - "random_forest"
+      - "neural_network"        # Zukünftig
+    metrics:
+      - "mse"
+      - "mae" 
+      - "r2_score"
+      - "training_time"
+
+# === AUSGABE-KONFIGURATION ===
+output:
+  # Verzeichnisse
+  directories:
+    base: "../outputs"
+    models: "models"
+    visualizations: "visualizations"
+    data: "data"
+    logs: "logs"
+    
+  # Dateiformate
+  formats:
+    model_save: "pickle"      # "pickle", "json"
+    data_export: "csv"        # "csv", "json", "numpy"
+    plots: "png"              # "png", "pdf", "svg"
+    
+  # Logging
+  logging:
+    level: "INFO"             # "DEBUG", "INFO", "WARNING", "ERROR"
+    format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    file_logging: true
+    console_logging: true
+
+# === REPRODUZIERBARKEIT ===
+reproducibility:
+  # Global Seeds
+  numpy_seed: 42
+  random_seed: 42
+  
+  # Deterministische Einstellungen
+  deterministic: true
+  
+# === PERFORMANCE-OPTIMIERUNG ===
+performance:
+  # Parallelisierung
+  parallel:
+    enabled: true
+    n_jobs: -1                # -1 = alle verfügbaren Kerne
+    
+  # Caching
+  cache:
+    enabled: true
+    cache_dir: "../cache"
+    max_size_mb: 1000
+    
+  # Memory Management
+  memory:
+    max_circuit_cache: 100
+    max_result_cache: 1000

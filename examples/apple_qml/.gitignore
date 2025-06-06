@@ -1,0 +1,288 @@
+# Apple QML System - Git Ignore File
+
+# === PYTHON ===
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+.python-version
+
+# pipenv
+Pipfile.lock
+
+# PEP 582
+__pypackages__/
+
+# Celery stuff
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath parsed files
+*.sage.py
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# === QUANTUM COMPUTING SPECIFIC ===
+# Qiskit cache
+.qiskit/
+qiskit.log
+
+# IBM Quantum credentials (NEVER commit these!)
+qiskit-ibm-credentials
+.qiskit-ibm-*
+quantum_credentials.json
+ibm_quantum_credentials
+
+# Quantum circuit drawings
+*.qasm
+circuit_*.png
+circuit_*.pdf
+
+# === PROJECT SPECIFIC ===
+# Output directories
+outputs/
+results/
+experiments/
+benchmarks/
+
+# Model files
+models/
+*.pkl
+*.pickle
+*.joblib
+*.h5
+*.model
+
+# Data files (depending on data policy)
+data/real/
+data/private/
+*.csv
+*.json
+*.npy
+*.npz
+
+# Visualization outputs
+visualizations/
+plots/
+figures/
+*.png
+*.pdf
+*.svg
+*.eps
+
+# Logs
+logs/
+*.log
+training_*.log
+experiment_*.log
+
+# Cache directories
+cache/
+.cache/
+__pycache__/
+
+# Temporary files
+temp/
+tmp/
+*.tmp
+*.temp
+
+# === DEVELOPMENT ===
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# === DOCUMENTATION ===
+# Sphinx build
+docs/_build/
+docs/build/
+
+# LaTeX
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.toc
+
+# === CONFIGURATION ===
+# Local configuration files
+config_local.yaml
+local_config.yaml
+.env.local
+
+# Secrets and credentials
+secrets/
+credentials/
+api_keys/
+*.key
+*.pem
+*.crt
+
+# === TESTING ===
+# Test outputs
+test_outputs/
+test_results/
+.coverage_html/
+
+# === PROFILING ===
+# Performance profiling
+*.prof
+*.profile
+profiling_results/
+
+# === NOTEBOOKS ===
+# Jupyter Notebook outputs
+*-checkpoint.ipynb
+notebook_outputs/
+
+# === DEPLOYMENT ===
+# Docker
+Dockerfile.local
+docker-compose.override.yml
+
+# Kubernetes
+*.local.yaml
+
+# === MISC ===
+# Backup files
+*.backup
+*.bak
+*.old
+
+# Archive files
+*.zip
+*.tar.gz
+*.rar
+
+# Large files (use Git LFS if needed)
+*.large
+
+# === PROJECT SPECIFIC PATTERNS ===
+# Apple QML specific ignores
+apple_qml_output/
+quantum_experiments/
+training_runs/
+hyperparameter_sweeps/
+
+# Specific file patterns
+*_checkpoint_*
+experiment_*_results.json
+model_weights_*.npy
